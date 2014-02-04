@@ -12,6 +12,7 @@
         <link href="${contextPath}/css/bootstrap-app-custom.css" rel="stylesheet">
         <script src="${contextPath}/js/jquery-1.10.2.min.js"></script>
         <script src="${contextPath}/js/bootstrap.min.js"></script>
+        <script src="${contextPath}/js/twitter-api.js"></script>
         
     </head>
 <body>

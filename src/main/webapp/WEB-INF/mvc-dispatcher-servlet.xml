@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <!-- Scan all packages -->
+	<!-- Scan all packages -->
 	<context:component-scan base-package="com.gaspar.twitter" />
 	<context:annotation-config />
 	<mvc:annotation-driven />
@@ -15,6 +15,9 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/img/**" location="/img/" />
 
+	<mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -38,11 +41,15 @@
 		<property name="basenames">
 			<list>
 				<value>i18n/messages</value>
-				<value>i18n/errors</value>
+                <value>i18n/errors</value>
+                <value>i18n/labels</value>
 				<value>application</value>
 			</list>
 		</property>
 		<property name="useCodeAsDefaultMessage" value="true"></property>
 	</bean>
 
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+          
 </beans>
