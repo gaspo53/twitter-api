@@ -15,7 +15,6 @@
                 </div>
                 <!-- /input-group -->
             </div>
-            <!-- /.col-lg-6 -->
             <button type="submit" class="ganar-decada btn btn-primary btn-lg btn-block top-block">
                 <spring:message code="labels.query"></spring:message>
             </button>
