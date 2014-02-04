@@ -7,6 +7,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
+/**
+ * Besides XML configuration, this feature of Spring 3.1 leaves the possibility of having Environments.
+
+* @author grajoy - Flux IT
+
+*
+ */
 @Configuration
 @PropertySource("classpath:application.properties")
 public class TwitterApiConfiguration {

@@ -94,9 +94,6 @@ public class TwitterServiceImpl implements TwitterService{
 		return result;
 	}
 
-
-
-
 	@Override
 	public boolean unfollow(String username) {
 		boolean result = false;
@@ -106,15 +103,12 @@ public class TwitterServiceImpl implements TwitterService{
 			result = true;
 		}
 		catch(Exception e){
-			//TODO informar estados de error
+			//TODO handle errors
 		}
 		
 		return result;
 	}
 
-
-	
-	
 	
 	
 	
