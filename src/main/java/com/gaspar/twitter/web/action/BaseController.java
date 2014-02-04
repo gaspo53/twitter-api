@@ -11,7 +11,9 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.social.UncategorizedApiException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gaspar.twitter.service.TwitterService;
@@ -34,28 +36,37 @@ public class BaseController {
 	
 	public String toXML(Object object, String rootName) throws Exception {
 		
-		String jsonData = this.toJSON(object);
+		String jsonString = this.toJsonString(object);
 
-		JSON json = JSONSerializer.toJSON(jsonData);
+		JSON jsonObject = JSONSerializer.toJSON(jsonString);
 
 		XMLSerializer serializer = new XMLSerializer();
 		serializer.setRootName(rootName);
+		serializer.setElementName("TwitterProfile");
 		serializer.setTypeHintsEnabled(false);
 		
-		String xml = serializer.write(json);
+		String xml = serializer.write(jsonObject,"ISO-8859-1");
 		
 		return xml;
 
 	}
 	  
 	
-	public String toJSON(Object object) throws JsonGenerationException, JsonMappingException, IOException {
+	public String toJsonString(Object object) throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 	}
 
 
-
+	@ExceptionHandler(UncategorizedApiException.class)
+	public ModelAndView handleUnknownException(){
+		this.setView(new ModelAndView("error/twitter_api"));
+		
+		return this.getView();
+	}
+	
+	
+	
 	//Getters and Setters
 	public ModelAndView getView() {
 		return view;

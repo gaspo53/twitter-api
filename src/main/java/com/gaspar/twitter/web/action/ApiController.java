@@ -26,7 +26,8 @@ public class ApiController extends BaseController {
 		String jsonResponse = null;
 		
 		try{
-			jsonResponse = toJSON(this.getTwitterService().followers(username));
+			//Use the method instead of returning the object directly, to do a pretty print
+			jsonResponse = toJsonString(this.getTwitterService().followers(username));
 		}
 		catch(Exception e){
 			//TODO handle errors
@@ -51,6 +52,7 @@ public class ApiController extends BaseController {
 		}
 		catch(Exception e){
 			//TODO handle errors
+			e.printStackTrace();
 		}
 		
 		return xmlResponse;
@@ -66,7 +68,7 @@ public class ApiController extends BaseController {
 		String jsonResponse = null;
 		
 		try{
-			jsonResponse = toJSON(getTwitterService().following(username));
+			jsonResponse = toJsonString(getTwitterService().following(username));
 		}
 		catch(Exception e){
 			//TODO handle errors
