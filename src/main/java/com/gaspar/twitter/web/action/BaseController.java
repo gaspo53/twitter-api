@@ -2,20 +2,28 @@ package com.gaspar.twitter.web.action;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.xml.XMLSerializer;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.social.UncategorizedApiException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import com.gaspar.twitter.exception.TwitterUnauthorizedException;
 import com.gaspar.twitter.service.TwitterService;
 
 @Controller
@@ -24,9 +32,11 @@ public class BaseController {
 	private ModelAndView view;
 	
 	@Autowired
+	private RequestMappingHandlerMapping handlerMapping;
+
+	@Autowired
 	@Qualifier("twitterService")
 	private TwitterService twitterService;
-	
 	
 	public BaseController(){
 		this.view = new ModelAndView();
@@ -57,8 +67,37 @@ public class BaseController {
 		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 	}
 
+	
+	
 
-	@ExceptionHandler(UncategorizedApiException.class)
+	/**
+	 * Checks if the ${token} given is in the database
+	 * @param token
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkToken(String token, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		if (StringUtils.isBlank(token)){
+			throw new TwitterUnauthorizedException();
+		}
+		
+		return "";
+
+	}
+	
+	
+	//Exception handlers
+	
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	@ResponseBody
+	@ExceptionHandler(TwitterUnauthorizedException.class)
+	public String unauthorized(HttpServletRequest request, HttpServletResponse response){
+		return "errors.api.unauthorized";
+	}
+
+	@ExceptionHandler(Exception.class)
 	public ModelAndView handleUnknownException(){
 		this.setView(new ModelAndView("error/twitter_api"));
 		
@@ -86,6 +125,12 @@ public class BaseController {
 
 	public void setTwitterService(TwitterService twitterService) {
 		this.twitterService = twitterService;
+	}
+
+
+
+	public RequestMappingHandlerMapping getHandlerMapping() {
+		return handlerMapping;
 	}
 
 }

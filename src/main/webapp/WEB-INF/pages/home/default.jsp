@@ -5,13 +5,13 @@
 </div>
 <p class="lead"><spring:message code="layout.page_header.help"></spring:message></p>
 
-<div class="form">
+<form class="form" action="${contextPath}" method="get">
     <fieldset>
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <input  type="text" class="form-control" id="usernameInput" 
-                            placeholder="@gaspo53" autocomplete="on" autofocus="autofocus">
+                    <input  type="text" class="form-control" id="usernameInput" name="username"
+                            placeholder="@gaspo53" autocomplete="on" autofocus="autofocus" value="${username}">
                 </div>
                 <!-- /input-group -->
             </div>
@@ -22,4 +22,17 @@
         <!-- /.row -->
     </fieldset>
 </form>
-<hr />
+
+ <cw:if test="${fn:length(handlerMethods) > 0}">
+	<div class="alert alert-success block bold">
+	    <spring:message code="layout.api.mappings.title"></spring:message>
+	</div>      
+	<cw:forEach items="${handlerMethods}" var="entry">
+	  <div>
+	    <a href="${contextPath}${entry}?token=${token}" target="_blank" class="mapping-link">${entry}</a>      
+	  </div>
+	</cw:forEach>
+    <div class="alert alert-warning block">
+        <spring:message code="messages.api.token.title" arguments="${token}"></spring:message>
+    </div> 
+</cw:if>
