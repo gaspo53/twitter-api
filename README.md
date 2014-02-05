@@ -45,33 +45,34 @@ Usage
 The API comes with a frontend Demo to obtain the API for a @username, and generates a token for you.
 
 Besides the demo, the complete API is as follows:
-
+<code>
   <pre>
     Obtain last 20 tweets of an user and it's following, in JSON/XML format
   </pre>
-  * GET /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
-  * GET /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
+  * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
+  * <b>GET</b> /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
 
   <pre>
     Obtain the Followers that an user have
   </pre>
-  * GET /api/username/followers.json?token=TOKEN_VALUE
-  * GET /api/username/followers.xml?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/followers.json?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/followers.xml?token=TOKEN_VALUE
   
   <pre>
     Obtain the Following users that an user have
   </pre>
-  * GET /api/username/following.json?token=TOKEN_VALUE
-  * GET /api/username/following.xml?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/following.json?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/following.xml?token=TOKEN_VALUE
   
   <pre>
     To start following the given username with the account configured in the API
   </pre>
-  * GET /api/username/follow.json?token=TOKEN_VALUE
-  * GET /api/username/follow.xml?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/follow.json?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/follow.xml?token=TOKEN_VALUE
   
   <pre>
     To stop following the given username with the account configured in the API
   </pre>
-  * GET /api/username/unfollow.json
-  * GET /api/username/unfollow.xml
+  * <b>GET</b> /api/username/unfollow.json
+  * <b>GET</b> /api/username/unfollow.xml
+</code>
