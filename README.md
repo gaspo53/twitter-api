@@ -37,7 +37,7 @@ Assuming that you have the access tokens of your Twitter Application, edit this 
 After that, edit <code>src/main/resources/jdbc/jdbc.properties</code> and complete the MySQL Access. 
 
 Now, open a Terminal, in the path of the project, and run <code>mvn jetty:run</code>
-After Maven downloads dependencies and starts Jetty WebServer, goto to [address]: http://localhost:8080/twitter-api
+After Maven downloads dependencies and starts Jetty WebServer, goto to [address]
 
 If you don't want to use Jetty, you can deploy the Application in another Web Container, such as Apache Tomcat 7 (it is tested with).
 
@@ -78,3 +78,9 @@ Besides the demo, the complete API is as follows:
   * <b>GET</b> /api/username/unfollow.json
   * <b>GET</b> /api/username/unfollow.xml
 </code>
+
+
+
+
+
+[address]: http://localhost:8080/twitter-api
