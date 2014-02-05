@@ -25,6 +25,7 @@ Pre-requisites
       * MySQL Server 5.x
       * git-core (for clonning the repository)
       * A Twitter Application with Read & Write Permissions
+      * An existing Database (since the Application creates the tables, but not the Database)
    </code>
 </pre> 
 
