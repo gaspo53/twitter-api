@@ -2,12 +2,9 @@ package com.gaspar.twitter.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.gaspar.twitter.common.entities.Token;
 import com.gaspar.twitter.exception.DataException;
 
-@Repository
 public interface TokenDao {
 
 	/**

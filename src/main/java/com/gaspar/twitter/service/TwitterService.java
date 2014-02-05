@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
-import org.springframework.stereotype.Service;
 
 import com.gaspar.twitter.exception.TwitterException;
 
@@ -15,7 +14,6 @@ import com.gaspar.twitter.exception.TwitterException;
 
 *
  */
-@Service
 public interface TwitterService {
 	
 	/**

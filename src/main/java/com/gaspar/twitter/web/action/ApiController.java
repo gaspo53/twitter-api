@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gaspar.twitter.common.entities.StatusErrorWrapper;
 import com.gaspar.twitter.exception.TwitterUnauthorizedException;
 import com.gaspar.twitter.util.LogHelper;
 
@@ -57,7 +58,7 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(this.getTwitterService().followers(username));
 		} catch (Exception e) {
 			LogHelper.error(this, e);
-			jsonResponse = toJsonString(e.getMessage());
+			jsonResponse = toJsonString(new StatusErrorWrapper(e));
 		}
 
 		return jsonResponse;
@@ -88,7 +89,7 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(followers, "TwitterProfiles");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(e.getMessage(), "TwitterProfiles");
+			xmlResponse = this.toXML(new StatusErrorWrapper(e), "TwitterProfiles");
 		}
 
 		return xmlResponse;
@@ -117,7 +118,7 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(getTwitterService().following(username));
 		} catch (Exception e) {
 			LogHelper.error(this, e);
-			jsonResponse = toJsonString(e.getMessage());
+			jsonResponse = toJsonString(new StatusErrorWrapper(e));
 		}
 
 		return jsonResponse;
@@ -149,7 +150,7 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(following, "TwitterProfiles");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(e.getMessage(), "TwitterProfiles");
+			xmlResponse = this.toXML(new StatusErrorWrapper(e), "TwitterProfiles");
 		}
 
 		return xmlResponse;
@@ -180,7 +181,7 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(tweets);
 		} catch (Exception e) {
 			LogHelper.error(this, e);
-			jsonResponse = toJsonString(e.getMessage());
+			jsonResponse = toJsonString(new StatusErrorWrapper(e));
 		}
 
 		return jsonResponse;
@@ -211,7 +212,7 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(tweets, "Tweets");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(e.getMessage(), "Tweets");
+			xmlResponse = this.toXML(new StatusErrorWrapper(e), "Tweets");
 		}
 
 		return xmlResponse;
@@ -241,7 +242,7 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(responseStatus);
 		} catch (Exception e) {
 			LogHelper.error(this, e);
-			jsonResponse = toJsonString(e.getMessage());
+			jsonResponse = toJsonString(new StatusErrorWrapper(e));
 		}
 
 		return jsonResponse;
@@ -271,7 +272,7 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(responseStatus, "FollowStatus");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(e.getMessage(), "FollowStatus");
+			xmlResponse = this.toXML(new StatusErrorWrapper(e), "FollowStatus");
 		}
 
 		return xmlResponse;
@@ -301,7 +302,7 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(responseStatus);
 		} catch (Exception e) {
 			LogHelper.error(this, e);
-			jsonResponse = toJsonString(e.getMessage());
+			jsonResponse = toJsonString(new StatusErrorWrapper(e));
 		}
 
 		return jsonResponse;
@@ -331,7 +332,7 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(responseStatus, "UnfollowStatus");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(e.getMessage(), "UnfollowStatus");
+			xmlResponse = this.toXML(new StatusErrorWrapper(e), "UnfollowStatus");
 		}
 
 		return xmlResponse;

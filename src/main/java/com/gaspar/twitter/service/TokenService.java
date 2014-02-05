@@ -2,12 +2,9 @@ package com.gaspar.twitter.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.gaspar.twitter.common.entities.Token;
 import com.gaspar.twitter.exception.BusinessException;
 
-@Service
 public interface TokenService {
 	
 	/**

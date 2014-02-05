@@ -15,7 +15,6 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -46,7 +45,6 @@ public class BaseController {
 	private RequestMappingHandlerMapping handlerMapping;
 
 	@Autowired
-	@Qualifier("twitterService")
 	private TwitterService twitterService;
 	
 	public BaseController(){
