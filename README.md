@@ -48,31 +48,31 @@ Besides the demo, the complete API is as follows:
 <code>
   <pre>
     Obtain last 20 tweets of an user and it's following, in JSON/XML format
-  </pre>
   * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
   * <b>GET</b> /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
+  </pre>
 
   <pre>
     Obtain the Followers that an user have
-  </pre>
   * <b>GET</b> /api/username/followers.json?token=TOKEN_VALUE
   * <b>GET</b> /api/username/followers.xml?token=TOKEN_VALUE
+  </pre>
   
   <pre>
     Obtain the Following users that an user have
-  </pre>
   * <b>GET</b> /api/username/following.json?token=TOKEN_VALUE
   * <b>GET</b> /api/username/following.xml?token=TOKEN_VALUE
+  </pre>
   
   <pre>
     To start following the given username with the account configured in the API
-  </pre>
   * <b>GET</b> /api/username/follow.json?token=TOKEN_VALUE
   * <b>GET</b> /api/username/follow.xml?token=TOKEN_VALUE
+  </pre>
   
   <pre>
     To stop following the given username with the account configured in the API
-  </pre>
   * <b>GET</b> /api/username/unfollow.json
   * <b>GET</b> /api/username/unfollow.xml
+  </pre>
 </code>
