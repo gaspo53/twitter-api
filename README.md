@@ -24,7 +24,7 @@ Pre-requisites
       * Java JRE/JDK 7.x
       * MySQL Server 5.x
       * git-core (for clonning the repository)
-      *A Twitter Application with Read&Write Permissions
+      * A Twitter Application with Read&Write Permissions
    </code>
 </pre> 
 
@@ -46,23 +46,32 @@ The API comes with a frontend Demo to obtain the API for a @username, and genera
 
 Besides the demo, the complete API is as follows:
 
-<pre>
-  Obtain last 20 tweets of an user and it's following, in JSON/XML format
+  <pre>
+    Obtain last 20 tweets of an user and it's following, in JSON/XML format
+  </pre>
   * GET /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
   * GET /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
 
-  Obtain the Followers that an user have
+  <pre>
+    Obtain the Followers that an user have
+  </pre>
   * GET /api/username/followers.json?token=TOKEN_VALUE
   * GET /api/username/followers.xml?token=TOKEN_VALUE
   
-  Obtain the Following users that an user have
+  <pre>
+    Obtain the Following users that an user have
+  </pre>
   * GET /api/username/following.json?token=TOKEN_VALUE
   * GET /api/username/following.xml?token=TOKEN_VALUE
   
-  To start following the given username with the account configured in the API
+  <pre>
+    To start following the given username with the account configured in the API
+  </pre>
   * GET /api/username/follow.json?token=TOKEN_VALUE
   * GET /api/username/follow.xml?token=TOKEN_VALUE
   
-  To stop following the given username with the account configured in the API
+  <pre>
+    To stop following the given username with the account configured in the API
+  </pre>
   * GET /api/username/unfollow.json
   * GET /api/username/unfollow.xml
