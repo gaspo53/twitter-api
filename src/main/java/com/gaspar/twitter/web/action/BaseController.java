@@ -113,7 +113,7 @@ public class BaseController {
 	 * @param request
 	 * @param response
 	 * @return
-	 * @throws Exception
+	 * @throws TwitterUnauthorizedException
 	 */
 	public void checkToken(String token, HttpServletRequest request, HttpServletResponse response) throws TwitterUnauthorizedException{
 		
