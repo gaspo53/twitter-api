@@ -24,7 +24,7 @@ Pre-requisites
       * Java JRE/JDK 7.x
       * MySQL Server 5.x
       * git-core (for clonning the repository)
-      * A Twitter Application with Read&Write Permissions
+      * A Twitter Application with Read & Write Permissions
    </code>
 </pre> 
 
