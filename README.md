@@ -53,7 +53,7 @@ Besides the demo, the complete API is as follows:
   </pre>
   * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
   * <b>GET</b> /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
-
+</code>
   <pre>
     Obtain the Followers that an user have
   </pre>
