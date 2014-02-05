@@ -115,7 +115,7 @@ public class BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String checkToken(String token, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String checkToken(String token, HttpServletRequest request, HttpServletResponse response) throws TwitterUnauthorizedException{
 		
 		if (!this.getTokenService().isTokenValid(token)){
 			SessionUtils.removeAttr("token", request.getSession());
