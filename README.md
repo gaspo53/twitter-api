@@ -49,7 +49,8 @@ The API comes with a frontend Demo to obtain the API for a @username, and genera
 Besides the demo, the complete API is as follows:
 <code>
   <pre>
-    Obtain last 20 tweets of an user and it's following (with the possibility to user a keyword filter), in JSON/XML format
+    Obtain last 20 tweets of an user and it's following 
+    (with the possibility to user a keyword filter), in JSON/XML format
   </pre>
   * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
   * <b>GET</b> /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
