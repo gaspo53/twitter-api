@@ -19,7 +19,6 @@ import com.gaspar.twitter.exception.TwitterUnauthorizedException;
 @RequestMapping("/api")
 public class ApiController extends BaseController {
 
-	
 	// All the exceptions that methods can throw, 
 	// are handled by BaseController.unauthorized() or BaseController.handleUnknownException() 
 	
@@ -151,5 +150,6 @@ public class ApiController extends BaseController {
 		
 		return xmlResponse;
 	}
+
 
 }

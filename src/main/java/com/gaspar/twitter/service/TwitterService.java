@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * Service interface based on Spring Social (using it's entities).
 
-* @author grajoy - Flux IT
+* @author Gaspar Rajoy
 
 *
  */

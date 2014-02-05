@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
@@ -15,6 +16,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,12 +26,21 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.gaspar.twitter.exception.TwitterUnauthorizedException;
+import com.gaspar.twitter.service.TokenService;
 import com.gaspar.twitter.service.TwitterService;
+import com.gaspar.twitter.util.LogHelper;
+import com.gaspar.twitter.util.SessionUtils;
 
 @Controller
 public class BaseController {
 	
 	private ModelAndView view;
+	
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Autowired
 	private RequestMappingHandlerMapping handlerMapping;
@@ -61,15 +72,41 @@ public class BaseController {
 
 	}
 	  
-	
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	public String toJsonString(Object object) throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 	}
 
 	
-	
+	/** Generates a new token and save it into the DB
+	 * @param session
+	 * @return
+	 */
+	public String generateToken(HttpSession session) {
+		
+		String token = null;
+		if (StringUtils.isBlank(SessionUtils.getAttr("token", session))){
+			try {
+				token = this.getTokenService().newToken(SessionUtils.generateToken(session));
+			} catch (Exception e) {
+				LogHelper.error(this, e);
+			}
+		}else{
+			token = SessionUtils.getAttr("token", session);
+		}
+		
+		return token;
+	}
 
+	
 	/**
 	 * Checks if the ${token} given is in the database
 	 * @param token
@@ -79,22 +116,23 @@ public class BaseController {
 	 * @throws Exception
 	 */
 	public String checkToken(String token, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		if (StringUtils.isBlank(token)){
+		
+		if (!this.getTokenService().isTokenValid(token)){
+			SessionUtils.removeAttr("token", request.getSession());
 			throw new TwitterUnauthorizedException();
 		}
-		
+
 		return "";
 
 	}
 	
 	
 	//Exception handlers
-	
 	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
 	@ResponseBody
 	@ExceptionHandler(TwitterUnauthorizedException.class)
 	public String unauthorized(HttpServletRequest request, HttpServletResponse response){
-		return "errors.api.unauthorized";
+		return "401 - UNAUTHORIZED (INVALID TOKEN)";
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -131,6 +169,40 @@ public class BaseController {
 
 	public RequestMappingHandlerMapping getHandlerMapping() {
 		return handlerMapping;
+	}
+
+	/**
+	 * @return the tokenService
+	 */
+	public TokenService getTokenService() {
+		return tokenService;
+	}
+
+
+
+	/**
+	 * @param tokenService the tokenService to set
+	 */
+	public void setTokenService(TokenService tokenService) {
+		this.tokenService = tokenService;
+	}
+
+
+
+	/**
+	 * @return the env
+	 */
+	public Environment getEnv() {
+		return env;
+	}
+
+
+
+	/**
+	 * @param env the env to set
+	 */
+	public void setEnv(Environment env) {
+		this.env = env;
 	}
 
 }
