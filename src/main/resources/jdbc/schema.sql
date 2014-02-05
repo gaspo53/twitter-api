@@ -2,7 +2,6 @@
 -- Table structure for table `token`
 --
 
-DROP TABLE IF EXISTS `token`;
 CREATE TABLE IF NOT EXISTS `token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token_string` varchar(16) DEFAULT NULL,
