@@ -52,8 +52,8 @@ public class ApiController extends BaseController {
 
 		try {
 			/*
-			 * Use the method instead of returning the object directly, to do a
-			 * pretty print
+			 * Use the method toJsonString() instead of returning the object
+			 * directly, to do a pretty print
 			 */
 			jsonResponse = toJsonString(this.getTwitterService().followers(username));
 		} catch (Exception e) {
