@@ -3,6 +3,10 @@ package com.gaspar.twitter.util;
 import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
+/**
+ * Helper class to logging. All methods are static
+ * @author Gaspar Rajoy
+ **/
 
 public class LogHelper
 {

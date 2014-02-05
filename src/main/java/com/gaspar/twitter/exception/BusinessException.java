@@ -1,10 +1,10 @@
 package com.gaspar.twitter.exception;
 
-public class BusinessException extends Exception{
+/**
+ * @author Gaspar Rajoy
+ **/
 
-	/**
-	 * 
-	 */
+public class BusinessException extends Exception{
 	private static final long serialVersionUID = 2L;
 
 	//Default constructor

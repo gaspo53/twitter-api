@@ -30,6 +30,10 @@ import com.gaspar.twitter.service.TwitterService;
 import com.gaspar.twitter.util.LogHelper;
 import com.gaspar.twitter.util.SessionUtils;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 @Controller
 public class BaseController {
 	

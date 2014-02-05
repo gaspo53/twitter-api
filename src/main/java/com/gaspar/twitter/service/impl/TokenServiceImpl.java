@@ -1,10 +1,3 @@
-/*
- * Fluxit S.A
- * La Plata - Buenos Aires - Argentina
- * http://www.fluxit.com.ar
- * Author: grajoy
- * Date:  Feb 5, 2014 - 11:34:43 AM
- */
 package com.gaspar.twitter.service.impl;
 
 import java.util.List;
@@ -22,10 +15,9 @@ import com.gaspar.twitter.service.TokenService;
 import com.gaspar.twitter.util.LogHelper;
 
 /**
-
- * @author grajoy - Flux IT
-
+ * @author Gaspar Rajoy
  **/
+
 @Transactional
 @Service
 public class TokenServiceImpl implements TokenService{

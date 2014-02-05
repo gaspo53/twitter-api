@@ -1,5 +1,9 @@
 package com.gaspar.twitter.dao.impl;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 import java.util.Date;
 import java.util.List;
 

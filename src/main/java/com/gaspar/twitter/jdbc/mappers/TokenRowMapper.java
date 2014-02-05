@@ -1,5 +1,9 @@
 package com.gaspar.twitter.jdbc.mappers;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

@@ -5,6 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * Helper class for Session operations
+ * @author Gaspar Rajoy
+ **/
+
 public class SessionUtils {
 	
 	public static String generateToken(HttpSession session){

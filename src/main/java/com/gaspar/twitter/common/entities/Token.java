@@ -1,5 +1,9 @@
 package com.gaspar.twitter.common.entities;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 import java.util.Date;
 
 public class Token {

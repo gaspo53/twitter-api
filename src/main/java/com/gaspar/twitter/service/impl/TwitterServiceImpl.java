@@ -18,6 +18,10 @@ import com.gaspar.twitter.exception.TwitterException;
 import com.gaspar.twitter.service.TwitterService;
 import com.gaspar.twitter.util.LogHelper;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 @Service
 public class TwitterServiceImpl implements TwitterService {
 	private String consumerKey;

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
+/**
+ * @author Gaspar Rajoy
+ **/
+
 @Controller
 @RequestMapping("/")
 public class MainController extends BaseController{

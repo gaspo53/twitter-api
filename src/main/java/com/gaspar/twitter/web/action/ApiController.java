@@ -18,6 +18,12 @@ import com.gaspar.twitter.common.entities.StatusErrorWrapper;
 import com.gaspar.twitter.exception.TwitterUnauthorizedException;
 import com.gaspar.twitter.util.LogHelper;
 
+/**
+ * The API Controller. It's defines all the API mappings
+ * @author Gaspar Rajoy
+ **/
+
+
 @Controller
 @RequestMapping("/api")
 public class ApiController extends BaseController {
