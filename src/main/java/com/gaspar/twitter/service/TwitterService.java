@@ -6,6 +6,8 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 
+import com.gaspar.twitter.exception.TwitterException;
+
 /**
  * Service interface based on Spring Social (using it's entities).
 
@@ -22,21 +24,21 @@ public interface TwitterService {
 	 * @param search (optional)
 	 * @return
 	 */
-	public List<Tweet> tweets(String username, String search);
+	public List<Tweet> tweets(String username, String search) throws TwitterException;
 
 	/**
 	 * Retrieves all the followers profiles for a given user.
 	 * @param username - The user account
 	 * @return
 	 */
-	public List<TwitterProfile> followers(String username);
+	public List<TwitterProfile> followers(String username) throws TwitterException;
 
 	/**
 	 * Retrieves all the following profiles for a given user.
 	 * @param username - The user account
 	 * @return
 	 */
-	public List<TwitterProfile> following(String username);
+	public List<TwitterProfile> following(String username) throws TwitterException;
 	
 	/**
 	 * Follows a user for the configured API key
@@ -44,8 +46,9 @@ public interface TwitterService {
 	 * @param username - The user account
 	 * @param userToFollow - The username to follow
 	 * @return
+	 * @throws TwitterException 
 	 */
-	public boolean follow(String username);
+	public boolean follow(String username) throws TwitterException;
 
 	/**
 	 * Unfollows a user for the configured API key
@@ -54,5 +57,5 @@ public interface TwitterService {
 	 * @param userToFollow - The username to follow
 	 * @return
 	 */
-	public boolean unfollow(String username);
+	public boolean unfollow(String username) throws TwitterException;
 }

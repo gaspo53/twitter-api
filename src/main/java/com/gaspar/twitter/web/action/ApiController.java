@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gaspar.twitter.exception.TwitterUnauthorizedException;
+import com.gaspar.twitter.util.LogHelper;
 
 @Controller
 @RequestMapping("/api")
@@ -49,7 +51,8 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(this.getTwitterService().followers(username));
 		}
 		catch(Exception e){
-			//TODO handle errors
+			LogHelper.error(this, e);
+			jsonResponse = toJsonString(e.getMessage());
 		}
 		
 		return jsonResponse;
@@ -81,8 +84,8 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(followers, "TwitterProfiles");
 		}
 		catch(Exception e){
-			//TODO handle errors
-			e.printStackTrace();
+			LogHelper.info(this, e);
+			xmlResponse = this.toXML(e.getMessage(), "TwitterProfiles");
 		}
 		
 		return xmlResponse;
@@ -112,7 +115,8 @@ public class ApiController extends BaseController {
 			jsonResponse = toJsonString(getTwitterService().following(username));
 		}
 		catch(Exception e){
-			//TODO handle errors
+			LogHelper.error(this, e);
+			jsonResponse = toJsonString(e.getMessage());
 		}
 		
 		return jsonResponse;
@@ -145,11 +149,212 @@ public class ApiController extends BaseController {
 			xmlResponse = this.toXML(following, "TwitterProfiles");
 		}
 		catch(Exception e){
-			//TODO handle errors
+			LogHelper.info(this, e);
+			xmlResponse = this.toXML(e.getMessage(), "TwitterProfiles");
 		}
 		
 		return xmlResponse;
 	}
 
+	
+	/**
+	 * Consumes the TwitterService to retrieve the tweets for the given ${username}
+	 * Response is JSON
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{username}/tweets.json", 
+					method = RequestMethod.GET, 
+					produces = "application/json")
+	@ResponseBody
+	public String tweetsJSON(@PathVariable("username") String username,
+							 @RequestParam(value="token", required=false) String token,
+							 @RequestParam(value="search", required=false) String search,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
 
+		this.checkToken(token, request, response);
+		
+		
+		String jsonResponse = null;
+		
+		try{
+			List<Tweet> tweets = this.getTwitterService().tweets(username, search);
+			jsonResponse = toJsonString(tweets);
+		}
+		catch(Exception e){
+			LogHelper.error(this, e);
+			jsonResponse = toJsonString(e.getMessage());
+		}
+		
+		return jsonResponse;
+	}
+
+	/**
+	 * Consumes the TwitterService to retrieve the tweets for the given ${username}
+	 * Response is XML
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{username}/tweets.xml", 
+					method = RequestMethod.GET, 
+					produces = "application/xml")
+	@ResponseBody
+	public String tweetsXML(@PathVariable("username") String username,
+							 @RequestParam(value="token", required=false) String token,
+							 @RequestParam(value="search", required=false) String search,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		this.checkToken(token, request, response);
+		
+		
+		String xmlResponse = null;
+		
+		try{
+			List<Tweet> tweets = this.getTwitterService().tweets(username, search);
+			xmlResponse = this.toXML(tweets, "Tweets");
+		}
+		catch(Exception e){
+			LogHelper.info(this, e);
+			xmlResponse = this.toXML(e.getMessage(), "Tweets");
+		}
+		
+		return xmlResponse;
+	}
+
+	/**
+	 * Consumes the TwitterService to start following the given ${userToFollow} for the logged user in the Twitter API
+	 * Response is JSON
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{userToFollow}/follow.json", 
+					method = RequestMethod.GET, 
+					produces = "application/json")
+	@ResponseBody
+	public String followJSON(@PathVariable("userToFollow") String userToFollow,
+							 @RequestParam(value="token", required=false) String token,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		this.checkToken(token, request, response);
+		
+		
+		String jsonResponse = null;
+		
+		try{
+			Boolean responseStatus = this.getTwitterService().follow(userToFollow);
+			jsonResponse = toJsonString(responseStatus);
+		}
+		catch(Exception e){
+			LogHelper.error(this, e);
+			jsonResponse = toJsonString(e.getMessage());
+		}
+		
+		return jsonResponse;
+	}
+	
+	/**
+	 * Consumes the TwitterService to start following the given ${userToFollow} for the logged user in the Twitter API
+	 * Response is XML
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{userToFollow}/follow.xml", 
+					method = RequestMethod.GET, 
+					produces = "application/xml")
+	@ResponseBody
+	public String followXML(@PathVariable("userToFollow") String userToFollow,
+							 @RequestParam(value="token", required=false) String token,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		this.checkToken(token, request, response);
+		
+		
+		String xmlResponse = null;
+		
+		try{
+			Boolean responseStatus = this.getTwitterService().follow(userToFollow);
+			xmlResponse = this.toXML(responseStatus, "FollowStatus");
+		}
+		catch(Exception e){
+			LogHelper.info(this, e);
+			xmlResponse = this.toXML(e.getMessage(), "FollowStatus");
+		}
+		
+		return xmlResponse;
+	}
+	
+	
+	/**
+	 * Consumes the TwitterService to start following the given ${userToFollow} for the logged user in the Twitter API
+	 * Response is JSON
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{userToFollow}/unfollow.json", 
+					method = RequestMethod.GET, 
+					produces = "application/json")
+	@ResponseBody
+	public String unfollowJSON(@PathVariable("userToFollow") String userToFollow,
+							 @RequestParam(value="token", required=false) String token,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		this.checkToken(token, request, response);
+		
+		
+		String jsonResponse = null;
+		
+		try{
+			Boolean responseStatus = this.getTwitterService().unfollow(userToFollow);
+			jsonResponse = toJsonString(responseStatus);
+		}
+		catch(Exception e){
+			LogHelper.error(this, e);
+			jsonResponse = toJsonString(e.getMessage());
+		}
+		
+		return jsonResponse;
+	}
+	
+	/**
+	 * Consumes the TwitterService to start following the given ${userToFollow} for the logged user in the Twitter API
+	 * Response is XML
+	 * @param username
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/{userToFollow}/unfollow.xml", 
+					method = RequestMethod.GET, 
+					produces = "application/xml")
+	@ResponseBody
+	public String unfollowXML(@PathVariable("userToFollow") String userToFollow,
+							 @RequestParam(value="token", required=false) String token,
+							 HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		this.checkToken(token, request, response);
+		
+		
+		String xmlResponse = null;
+		
+		try{
+			Boolean responseStatus = this.getTwitterService().unfollow(userToFollow);
+			xmlResponse = this.toXML(responseStatus, "UnfollowStatus");
+		}
+		catch(Exception e){
+			LogHelper.info(this, e);
+			xmlResponse = this.toXML(e.getMessage(), "UnfollowStatus");
+		}
+		
+		return xmlResponse;
+	}
 }

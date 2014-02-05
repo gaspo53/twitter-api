@@ -37,6 +37,7 @@ public class MainController extends BaseController{
 					 finalMapping = StringUtils.remove(finalMapping,"[");
 					 finalMapping = StringUtils.remove(finalMapping,"]");
 					 finalMapping = StringUtils.replace(finalMapping,"{username}",username);
+					 finalMapping = StringUtils.replace(finalMapping,"{userToFollow}",username);
 					 mappingString.add(finalMapping);
 				 }
 		    }
