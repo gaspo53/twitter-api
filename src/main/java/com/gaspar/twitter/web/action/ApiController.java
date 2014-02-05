@@ -87,15 +87,13 @@ public class ApiController extends BaseController {
 
 		this.checkToken(token, request, response);
 
-		List<TwitterProfile> followers = this.getTwitterService().followers(username);
-
 		String xmlResponse = null;
-
 		try {
-			xmlResponse = this.toXML(followers, "TwitterProfiles");
+			List<TwitterProfile> followers = this.getTwitterService().followers(username);
+			xmlResponse = this.toXmlString(followers, "TwitterProfiles");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(new StatusErrorWrapper(e), "TwitterProfiles");
+			xmlResponse = this.toXmlString(new StatusErrorWrapper(e), "TwitterProfiles");
 		}
 
 		return xmlResponse;
@@ -148,15 +146,14 @@ public class ApiController extends BaseController {
 
 		this.checkToken(token, request, response);
 
-		List<TwitterProfile> following = this.getTwitterService().following(username);
-
 		String xmlResponse = null;
 
 		try {
-			xmlResponse = this.toXML(following, "TwitterProfiles");
+			List<TwitterProfile> following = this.getTwitterService().following(username);
+			xmlResponse = this.toXmlString(following, "TwitterProfiles");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(new StatusErrorWrapper(e), "TwitterProfiles");
+			xmlResponse = this.toXmlString(new StatusErrorWrapper(e), "TwitterProfiles");
 		}
 
 		return xmlResponse;
@@ -215,10 +212,10 @@ public class ApiController extends BaseController {
 
 		try {
 			List<Tweet> tweets = this.getTwitterService().tweets(username, search);
-			xmlResponse = this.toXML(tweets, "Tweets");
+			xmlResponse = this.toXmlString(tweets, "Tweets");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(new StatusErrorWrapper(e), "Tweets");
+			xmlResponse = this.toXmlString(new StatusErrorWrapper(e), "Tweets");
 		}
 
 		return xmlResponse;
@@ -275,10 +272,10 @@ public class ApiController extends BaseController {
 
 		try {
 			Boolean responseStatus = this.getTwitterService().follow(userToFollow);
-			xmlResponse = this.toXML(responseStatus, "FollowStatus");
+			xmlResponse = this.toXmlString(responseStatus, "FollowStatus");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(new StatusErrorWrapper(e), "FollowStatus");
+			xmlResponse = this.toXmlString(new StatusErrorWrapper(e), "FollowStatus");
 		}
 
 		return xmlResponse;
@@ -335,10 +332,10 @@ public class ApiController extends BaseController {
 
 		try {
 			Boolean responseStatus = this.getTwitterService().unfollow(userToFollow);
-			xmlResponse = this.toXML(responseStatus, "UnfollowStatus");
+			xmlResponse = this.toXmlString(responseStatus, "UnfollowStatus");
 		} catch (Exception e) {
 			LogHelper.info(this, e);
-			xmlResponse = this.toXML(new StatusErrorWrapper(e), "UnfollowStatus");
+			xmlResponse = this.toXmlString(new StatusErrorWrapper(e), "UnfollowStatus");
 		}
 
 		return xmlResponse;

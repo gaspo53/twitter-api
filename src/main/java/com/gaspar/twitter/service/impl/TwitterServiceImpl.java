@@ -28,7 +28,8 @@ public class TwitterServiceImpl implements TwitterService {
 	private String consumerSecret;
 	private String accessToken;
 	private String accessTokenSecret;
-
+	private Integer pageSize;
+	
 	@Autowired
 	private Environment env;
 
@@ -40,6 +41,7 @@ public class TwitterServiceImpl implements TwitterService {
 		this.consumerSecret = getEnv().getProperty("twitter.consumerSecret");
 		this.accessToken = getEnv().getProperty("twitter.accessToken");
 		this.accessTokenSecret = getEnv().getProperty("twitter.accessTokenSecret");
+		this.pageSize = Integer.valueOf(getEnv().getProperty("twitter.timeline.pageSize", "20"));
 
 		twitter = new TwitterTemplate(getConsumerKey(), getConsumerSecret(), getAccessToken(), getAccessTokenSecret());
 	}
@@ -49,10 +51,13 @@ public class TwitterServiceImpl implements TwitterService {
 
 		try {
 			List<Tweet> allTweets = new ArrayList<Tweet>();
-			allTweets.addAll(getTwitter().timelineOperations().getUserTimeline(username));
+			allTweets.addAll(getTwitter().timelineOperations().getUserTimeline(username, getPageSize()));
 
 			for (TwitterProfile following : following(username)) {
-				allTweets.addAll(getTwitter().timelineOperations().getUserTimeline(following.getScreenName()));
+				//To avoid a 401 - Not authorized
+				if (!following.isProtected()){
+					allTweets.addAll(getTwitter().timelineOperations().getUserTimeline(following.getScreenName(), getPageSize()));
+				}
 			}
 
 			if (StringUtils.isNotBlank(search)) {
@@ -175,6 +180,14 @@ public class TwitterServiceImpl implements TwitterService {
 
 	public void setEnv(Environment env) {
 		this.env = env;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 
 }

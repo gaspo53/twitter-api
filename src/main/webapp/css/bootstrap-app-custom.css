@@ -14,3 +14,9 @@
 .mapping-link{
 	font-size: 24px;
 }
+
+.http-method{
+	color: #428CAA;
+	font-size: 25px;
+	font-weight: bold;
+}

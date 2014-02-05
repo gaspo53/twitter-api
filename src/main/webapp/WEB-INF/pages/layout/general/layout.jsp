@@ -19,10 +19,12 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
-	<a href="https://github.com/gaspo53/twitter-api"><img
-		style="position: absolute; top: 50px; right: 0; border: 0;"
-		src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
-		alt="Fork me on GitHub"></a>
+	<a href="https://github.com/gaspo53/twitter-api" target="_blank">
+		<img
+			style="position: absolute; top: 50px; right: 0; border: 0;"
+			src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+			alt="Fork me on GitHub">
+	</a>
 
 	<div class="container">
 		<div class="main-container">

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import com.gaspar.twitter.common.entities.StatusErrorWrapper;
 import com.gaspar.twitter.exception.TwitterUnauthorizedException;
 import com.gaspar.twitter.service.TokenService;
 import com.gaspar.twitter.service.TwitterService;
@@ -35,7 +36,7 @@ import com.gaspar.twitter.util.SessionUtils;
  **/
 
 @Controller
-public class BaseController {
+public class BaseController{
 	
 	private ModelAndView view;
 	
@@ -63,7 +64,7 @@ public class BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String toXML(Object object, String rootName) throws Exception {
+	public String toXmlString(Object object, String rootName) throws Exception {
 		
 		String jsonString = this.toJsonString(object);
 
@@ -81,16 +82,24 @@ public class BaseController {
 	}
 	  
 	/**
-	 * Returns a well formes JSON String in Pretty Print mode
+	 * Returns a well formed JSON String in Pretty Print mode
 	 * @param object
 	 * @return
 	 * @throws JsonGenerationException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public String toJsonString(Object object) throws JsonGenerationException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+	public String toJsonString(Object object) {
+		String result = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+		} catch (Exception e) {
+			LogHelper.error(this, e);
+		}
+		
+		return result;
+		
 	}
 
 	
@@ -113,7 +122,6 @@ public class BaseController {
 		
 		return token;
 	}
-
 	
 	/**
 	 * Checks if the ${token} given is in the database
@@ -127,25 +135,24 @@ public class BaseController {
 		
 		if (!this.getTokenService().isTokenValid(token)){
 			SessionUtils.removeAttr("token", request.getSession());
-			throw new TwitterUnauthorizedException();
+			throw new TwitterUnauthorizedException("401 - UNAUTHORIZED (INVALID TOKEN)");
 		}
 	}
 	
+	
 	//Exception handlers
+
 	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
 	@ResponseBody
 	@ExceptionHandler(TwitterUnauthorizedException.class)
-	public String unauthorized(HttpServletRequest request, HttpServletResponse response){
-		return "401 - UNAUTHORIZED (INVALID TOKEN)";
+	public String unauthorized(HttpServletRequest request, HttpServletResponse response, Exception e){
+		return toJsonString(new StatusErrorWrapper(e));
 	}
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handleUnknownException(){
-		this.setView(new ModelAndView("error/twitter_api"));
-		
-		return this.getView();
+		return new ModelAndView("error/twitter_api");	
 	}
-	
 	
 	
 	//Getters and Setters

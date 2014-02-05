@@ -29,7 +29,7 @@
 	</div>      
 	<cw:forEach items="${handlerMethods}" var="entry">
 	  <div>
-	    <a href="${contextPath}${entry}?token=${token}" target="_blank" class="mapping-link">${entry}</a>      
+	    <span class="http-method">GET&nbsp;</span><a href="${contextPath}${entry}?token=${token}" target="_blank" class="mapping-link">${entry}</a>      
 	  </div>
 	</cw:forEach>
     <div class="alert alert-warning block">

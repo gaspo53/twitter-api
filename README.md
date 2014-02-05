@@ -33,7 +33,16 @@ Deploy
 ------
 Before deploying the Application, you have to set up a few things.
 Assuming that you have the access tokens of your Twitter Application, edit this file:
-<code>src/main/resources/application.properties</code> and complete the values of the properties with your Twitter App.
+<code>src/main/resources/application.properties</code> and complete the values of the properties with your Twitter App's values.
+Also, don't forget to set <code>twitter.timeline.pageSize</code>; this placeholder has effect when you ask for users's tweets.
+
+<pre>
+  <code>
+      Setting a high value for <b>twitter.timeline.pageSize</b> means a <b>slower</b> response time.
+      Recommended is 20-30.
+   </code>
+</pre> 
+
 
 After that, edit <code>src/main/resources/jdbc/jdbc.properties</code> and complete the MySQL Access. 
 
@@ -45,12 +54,12 @@ If you don't want to use Jetty, you can deploy the Application in another Web Co
 Usage
 ------
 
-The API comes with a frontend Demo to obtain the API for a @username, and generates a token for you.
+The API comes with a frontend Demo to obtain the API for a <b>@username</b>, and generates a token for you.
 
 Besides the demo, the complete API is as follows:
 <code>
   <pre>
-    Obtain last 20 tweets of an user and it's following 
+    Obtain last <code>twitter.timeline.pageSize</code> tweets of an user and it's following 
     (with the possibility to user a keyword filter), in JSON/XML format
   </pre>
   * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (optional, one-only value)
