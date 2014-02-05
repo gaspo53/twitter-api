@@ -76,8 +76,8 @@ Besides the demo, the complete API is as follows:
   <pre>
     To stop following the given username with the account configured in the API
   </pre>
-  * <b>GET</b> /api/username/unfollow.json
-  * <b>GET</b> /api/username/unfollow.xml
+  * <b>GET</b> /api/username/unfollow.json?token=TOKEN_VALUE
+  * <b>GET</b> /api/username/unfollow.xml?token=TOKEN_VALUE
 </code>
 
 
