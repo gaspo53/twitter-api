@@ -32,7 +32,7 @@ Deploy
 ------
 Before deploying the Application, you have to set up a few things.
 Assuming that you have the access tokens of your Twitter Application, edit this file:
-<code>src/main/resources/application.properties</code> and complete the values of the properties with your own Twitter App.
+<code>src/main/resources/application.properties</code> and complete the values of the properties with your Twitter App.
 
 After that, edit <code>src/main/resources/jdbc/jdbc.properties</code> and complete the MySQL Access. 
 
@@ -53,7 +53,7 @@ Besides the demo, the complete API is as follows:
   </pre>
   * <b>GET</b> /api/username/tweets.json?token=TOKEN_VALUE&search=KEYWORD (one-only value)
   * <b>GET</b> /api/username/tweets.xml?token=TOKEN_VALUE&search=KEYWORD (one-only value)
-</code>
+
   <pre>
     Obtain the Followers that an user have
   </pre>
