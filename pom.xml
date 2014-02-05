@@ -198,7 +198,6 @@
 					<archive>
 						<manifestEntries>
 							<version>1.0.0</version>
-							<!-- <svn-revision>${buildNumber}</svn-revision> -->
 						</manifestEntries>
 					</archive>
 				</configuration>
