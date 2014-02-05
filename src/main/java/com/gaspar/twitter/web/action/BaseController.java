@@ -54,7 +54,13 @@ public class BaseController {
 	}
 
 	
-	
+	/**
+	 * Returns a well formed XML String, serializing the Object received to JSON first.
+	 * @param object
+	 * @param rootName
+	 * @return
+	 * @throws Exception
+	 */
 	public String toXML(Object object, String rootName) throws Exception {
 		
 		String jsonString = this.toJsonString(object);
@@ -73,7 +79,7 @@ public class BaseController {
 	}
 	  
 	/**
-	 * 
+	 * Returns a well formes JSON String in Pretty Print mode
 	 * @param object
 	 * @return
 	 * @throws JsonGenerationException
@@ -122,7 +128,6 @@ public class BaseController {
 			throw new TwitterUnauthorizedException();
 		}
 	}
-	
 	
 	//Exception handlers
 	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)

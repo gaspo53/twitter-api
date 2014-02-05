@@ -9,6 +9,7 @@ public class Token {
 	private Date createad_at;
 	
 	
+	//Default constructor
 	public Token() {}
 
 	public Token(String token) {

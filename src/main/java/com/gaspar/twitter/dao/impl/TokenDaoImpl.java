@@ -7,14 +7,12 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import com.gaspar.twitter.common.entities.Token;
 import com.gaspar.twitter.dao.TokenDao;
 import com.gaspar.twitter.exception.DataException;
 import com.gaspar.twitter.jdbc.mappers.TokenRowMapper;
 
-@Repository
 public class TokenDaoImpl implements TokenDao {
 
 	private DataSource dataSource;

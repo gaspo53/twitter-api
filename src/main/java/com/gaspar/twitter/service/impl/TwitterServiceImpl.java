@@ -12,13 +12,11 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
-import org.springframework.stereotype.Service;
 
 import com.gaspar.twitter.exception.TwitterException;
 import com.gaspar.twitter.service.TwitterService;
 import com.gaspar.twitter.util.LogHelper;
 
-@Service("twitterService")
 public class TwitterServiceImpl implements TwitterService {
 	private String consumerKey;
 	private String consumerSecret;

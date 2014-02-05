@@ -15,7 +15,7 @@ import com.gaspar.twitter.exception.TwitterException;
 
 *
  */
-@Service(value="twitterService")
+@Service
 public interface TwitterService {
 	
 	/**
