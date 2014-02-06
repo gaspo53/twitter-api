@@ -48,9 +48,9 @@ public class ApiController extends BaseController {
 
 	@RequestMapping(value = "/{username}/followers.json", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public String followersJSON(@PathVariable("username")
-	String username, @RequestParam(value = "token", required = false)
-	String token, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String followersJSON(@PathVariable("username") String username, 
+								@RequestParam(value = "token", required = false)
+								String token, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String jsonResponse = null;
 

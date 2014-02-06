@@ -3,7 +3,6 @@ import urllib2
 import base64
 import sys
 
-
 if len (sys.argv) == 4 :
   authToken = sys.argv[1]
   host = sys.argv[2] 
