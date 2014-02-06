@@ -91,6 +91,11 @@ Besides the demo, the complete API is as follows:
 </code>
 
 
+Testing
+-------
+
+A test scrtip written in Python is included in the root of the project: <code>api-test.py</code>.
+Just call the script and it will show the usage.
 
 
 
